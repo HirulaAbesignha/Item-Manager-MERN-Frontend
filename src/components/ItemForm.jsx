@@ -1,15 +1,19 @@
 import { useState } from "react";
 
 function ItemForm({ initialValues, onSubmit, submitText }) {
-  const [formData, setFormData] = useState(
-    initialValues || {
-      name: "",
-      category: "",
-      price: "",
-      description: "",
-      imageUrl: "",
-    }
-  );
+  const defaultValues = {
+    name: "",
+    category: "",
+    price: "",
+    weightSize: "",
+    description: "",
+    imageUrl: "",
+  };
+
+  const [formData, setFormData] = useState({
+    ...defaultValues,
+    ...initialValues,
+  });
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -40,6 +44,15 @@ function ItemForm({ initialValues, onSubmit, submitText }) {
         name="price"
         value={formData.price}
         onChange={handleChange}
+        required
+      />
+
+      <label>Weight / Size</label>
+      <input
+        name="weightSize"
+        value={formData.weightSize}
+        onChange={handleChange}
+        placeholder="Example: 500g, 1kg, Medium, XL"
         required
       />
 
